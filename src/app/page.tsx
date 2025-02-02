@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import './globals.css';  
 
 export default function Home() {
   return (
