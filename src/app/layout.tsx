@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
-import Provider from "./Provider";
+import Provider from "./provider";
+import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
 });
-
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-  title: "Dream_Sketch_AI",
- description:
+  title: "StableMax - Generate Images for FREE",
+  description:
     "Generate stunning images from text using AI models for free with StableMax. Turn your ideas into visual art instantly.",
   openGraph: {
     title: "StableMax - Free AI Image Generation",
@@ -38,17 +40,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-w-7xl mx-auto`}
       >
-         <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-          >
-            <Provider>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <Provider>
             <Header />
             {children}
-            </Provider>
-          </ThemeProvider>
+            <Toaster />
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   );

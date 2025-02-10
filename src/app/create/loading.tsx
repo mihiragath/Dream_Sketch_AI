@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import { BiLoaderCircle } from "react-icons/bi";
 
-function loading() {
+export default function loading() {
   return (
-    <div className="w-full h-dvh flex justify-center items-center"></div>
-  )
+    <div className="w-full h-dvh flex justify-center items-center">
+      <BiLoaderCircle className="animate-spin" />
+    </div>
+  );
 }
-
-export default loading
