@@ -18,40 +18,25 @@ export default function Header() {
   }, [status, session]);
 
   return (
-    <div className="fixed top-0 w-full h-[60px] bg-black/70 backdrop-blur-lg shadow-md border-b border-white/20 p-3 flex justify-between items-center z-50">
-      {/* Logo Section */}
-      <Link href="/" className="text-white text-xl font-extrabold tracking-widest hover:text-gray-300 transition-all duration-300">
-        Dream<span className="text-blue-500">-Sketch</span>
+    <div className="fixed top-0 w-full h-[60px] bg-black border-b border-white/60 p-3 flex justify-between items-center z-50">
+      <Link href="/">
+        <h2 className="font-bold text-xl">StableMax</h2>
       </Link>
-
-      {/* Loading Indicator */}
       {initialLoading && status === "loading" ? (
-        <BiLoaderCircle className="animate-spin text-blue-400 text-2xl" />
+        <BiLoaderCircle className="animate-spin" />
       ) : !session ? (
-        <div>
-          <Button 
-            onClick={() => signIn("google")}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 text-white font-semibold px-5 py-2 rounded-lg shadow-lg transition-all duration-300"
-          >
-            Login
-          </Button>
+        <div className="__menu">
+          <Button onClick={() => signIn("google")}>Login</Button>
         </div>
       ) : (
-        <div className="flex gap-3 items-center">
-          {/* Logout Button */}
-          <Button 
-            onClick={() => signOut()} 
-            variant="destructive"
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 transition-all duration-300"
-          >
+        <div className="flex gap-3 justify-center items-center">
+          <Button onClick={() => signOut()} variant="destructive">
             Logout
           </Button>
-
-          {/* Profile Avatar */}
           <Link href="/profile">
-            <Avatar className="cursor-pointer transition-transform hover:scale-110 border-2 border-blue-500 shadow-lg">
+            <Avatar>
               <AvatarImage src={session.user?.image || ""} />
-              <AvatarFallback className="bg-gray-700 text-white">CN</AvatarFallback>
+              <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </Link>
         </div>

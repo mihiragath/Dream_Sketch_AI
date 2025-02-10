@@ -12,15 +12,15 @@ import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
 import { z } from "zod";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
-import { BiLoaderCircle } from "react-icons/bi";
 
 const formSchema = z.object({
   prompt: z
     .string()
-    .min(7, { message: "Prompt must be at least 7 characters long!" }),
+    .min(7, { message: "Prompt must be atleast 7 characters long!" }),
 });
 
 export default function Page() {
@@ -57,72 +57,62 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-start pt-[72px] bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-6">
-      {/* Heading Section */}
-      <div className="text-center">
-        <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">
-          Create Stunning AI Art
-        </h1>
-        <p className="text-white/60 mt-2">Generate Images from Text for FREE</p>
+    <div className="w-full p-3 min-h-dvh h-full flex justify-start items-center pt-[72px] flex-col">
+      <div className="w-full p-3">
+        <h1 className="text-center font-bold text-white text-4xl">Create</h1>
+        <p className="text-white/60 text-center">
+          Generate Stunning Images from Text for FREE
+        </p>
       </div>
-
-      {/* Main Container */}
-      <div className="flex w-full max-w-5xl gap-6 mt-8 flex-col md:flex-row">
-        {/* Form Section */}
-        <div className="flex-1 bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
-          <p className="text-white/80 text-sm mb-4">
-            Type your prompt below to create any image you can imagine!
+      <div className="flex w-full gap-3 h-[calc(100dvh-200px)] md:flex-row flex-col">
+        <div className="__form flex-[2] h-full gap-2 flex justify-center items-start flex-col">
+          <p className="text-center w-full lg:text-left text-sm text-white/80">
+            Type you prompt below to create any image you can imagine!
           </p>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col gap-4"
-            >
-              <FormField
-                control={form.control}
-                name="prompt"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g. A futuristic city at sunset..."
-                        className="w-full border border-white/30 bg-transparent text-white p-3 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                loading={loading}
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 rounded-lg transition-all flex items-center justify-center"
+          <div className="flex gap-2 w-full">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full flex gap-2"
               >
-                {loading ? (
-                  <BiLoaderCircle className="animate-spin text-xl" />
-                ) : (
-                  "Generate"
-                )}
-              </Button>
-            </form>
-          </Form>
+                <FormField
+                  control={form.control}
+                  name="prompt"
+                  render={({ field }) => (
+                    <FormItem className="w-full max-w-full lg:max-w-[70%]">
+                      <FormControl>
+                        <Input
+                          placeholder="a cat sitting over a sofa..."
+                          className="w-full transition-all border-white"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button loading={loading} type="submit">
+                  Generate
+                </Button>
+              </form>
+            </Form>
+          </div>
         </div>
-
-        {/* Output Image Section */}
-        <div className="flex-1 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 min-h-[300px] relative overflow-hidden">
+        <div className="__output min-h-[300px] lg:min-h-full lg:h-full flex-[1] bg-white/5 rounded-lg relative overflow-hidden">
           {outputImg ? (
             <Image
-              alt="Generated Output"
-              className="w-full h-full object-contain rounded-lg"
+              alt="output"
+              className="w-full h-full object-contain"
               src={outputImg}
               width={300}
               height={300}
             />
           ) : (
-            <div className="text-white/60 text-center p-6">
-              Enter a prompt and hit generate!
-            </div>
+            <>
+              <div className="w-full h-full flex justify-center items-center text-white/70 text-center p-3">
+                Enter your prompt and hit generate!
+              </div>
+            </>
           )}
         </div>
       </div>
