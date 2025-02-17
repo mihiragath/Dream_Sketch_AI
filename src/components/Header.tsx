@@ -35,7 +35,7 @@ export default function Header() {
           >
             Login
           </Button>
-        </div>
+        </div >
       ) : (
         <div className="flex gap-3 items-center">
           {/* Logout Button */}
